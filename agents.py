@@ -36,16 +36,24 @@ def bfs(campus, start, goal):
 
 
 def manhattan(state, goal):
-    """TODO 1: Return Manhattan distance between two (row, column) tuples."""
+    # """TODO 1: Return Manhattan distance between two (row, column) tuples."""
     # Add the absolute row difference and the absolute column difference.
-    raise NotImplementedError("Complete TODO 1: manhattan")
+    # raise NotImplementedError("Complete TODO 1: manhattan")
+    r_s, c_s = state
+    r_g, c_g = goal
+
+    distance = abs(r_s - r_g) + abs(c_s - c_g)
+
+    return distance 
 
 
 def astar(campus, start, goal):
-    """TODO 2: Return SearchResult(path, expanded) for A* graph search."""
+    # """TODO 2: Return SearchResult(path, expanded) for A* graph search."""
     # Use heapq as a priority queue and manhattan() as the heuristic.
     # Track best known g-costs and parent states in dictionaries.
-    raise NotImplementedError("Complete TODO 2: astar")
+    # raise NotImplementedError("Complete TODO 2: astar")
+    
+
 
 
 def epsilon_greedy(q_values, state, actions, epsilon, rng):
