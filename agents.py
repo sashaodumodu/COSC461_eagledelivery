@@ -41,9 +41,7 @@ def manhattan(state, goal):
     # raise NotImplementedError("Complete TODO 1: manhattan")
     r_s, c_s = state
     r_g, c_g = goal
-
     distance = abs(r_s - r_g) + abs(c_s - c_g)
-
     return distance 
 
 
@@ -52,8 +50,45 @@ def astar(campus, start, goal):
     # Use heapq as a priority queue and manhattan() as the heuristic.
     # Track best known g-costs and parent states in dictionaries.
     # raise NotImplementedError("Complete TODO 2: astar")
-    
+    if start == goal: #immediate edge case check
+        return SearchResult(path=[start], expanded=0)
 
+    frontier = []
+    counter = 0
+    g_cost = {start: 0}
+    parents = {start: None}
+    expanded = 0
+
+    init_h = manhattan(start, goal)
+    init_g = 0
+    init_f = init_g + init_h
+
+    heapq.heappush(frontier, (init_f, counter, init_g, start))
+    counter += 1
+
+    while frontier: 
+        f, _, g, state = heapq.heappop(frontier)
+
+        if g>g_cost.get(state, float('inf')):
+            continue
+        if state == goal:
+            path = reconstruct_path(parents, goal)
+            return SearchResult(path, expanded)
+        else:
+            expanded += 1
+            for action, successor in campus.neighbors(state):
+                new_g = g + 1
+
+                if new_g < g_cost.get(successor, float('inf')):
+                    g_cost[successor] = new_g
+                    parents[successor] = state
+
+                    new_h = manhattan(successor, goal)
+                    new_f = new_g + new_h
+                    heapq.heappush(frontier, (new_f, counter, new_g, successor))
+                    counter += 1
+
+    return SearchResult(path=None, expanded=expanded)
 
 
 def epsilon_greedy(q_values, state, actions, epsilon, rng):
