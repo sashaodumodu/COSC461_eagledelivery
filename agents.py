@@ -103,11 +103,11 @@ def epsilon_greedy(q_values, state, actions, epsilon, rng):
     q_max = float('-inf') #start tracking best q values, use -inf because values can range from any space
 
     for action in actions:
-        q = q_values.get((state, actions), 0.0) #use 0.0 as default, remember to use .get
+        q = q_values.get((state, action), 0.0) #use 0.0 as default, remember to use .get
         if q > q_max: #compare
             q_max = q
             best_actions = [action]
-        elif q == q_max: #add anyway since it's on the last level
+        elif q == q_max: #add anyway since it's on the same level
             best_actions.append(action)
     return rng.choice(best_actions)
 #need to remember when to use action/actions/best_actions vs. q
@@ -115,10 +115,28 @@ def epsilon_greedy(q_values, state, actions, epsilon, rng):
 
 def q_learning_update(q_values, state, action, reward, next_state,
                       actions, alpha, gamma, terminal):
-    """TODO 4: Update exactly one Q-table entry in place; return nothing."""
+    # """TODO 4: Update exactly one Q-table entry in place; return nothing."""
     # Get Q(state, action), defaulting to 0.0.
     # If terminal is True, the target is reward with no continuation term.
     # Otherwise target = reward + gamma * max Q(next_state, next_action).
     # Consider every action, including unseen entries with value 0.0.
     # Apply Q <- Q + alpha * (target - Q).
-    raise NotImplementedError("Complete TODO 4: q_learning_update")
+    # raise NotImplementedError("Complete TODO 4: q_learning_update")
+
+    current_q = q_values.get((state, action), 0.0) #i keep forgetting to use .get
+
+    if terminal: #(true)
+        target = reward #edge case
+    else: #(false)
+        max_q = float('-inf')
+
+        for next_action in actions:
+            q = q_values.get((next_state, next_action), 0.0)
+            if max_q < q:
+                max_q = q
+        target = reward + gamma * max_q
+        pass
+
+    current_q = current_q + alpha * (target - current_q)
+    q_values[(state, action)] = current_q
+
