@@ -4,11 +4,11 @@
 This is our Project 1, which focuses on search and reinforcement learning. 
 
 `run_project.py` is the main script for training and evaluation 
-`/maps` contains both provided maps and my custom made `my_campus.txt` map
+`/maps` contains both provided maps and my custom-made `my_campus.txt` map
 
 My deliverable write-up/report is in the `/deliverables_writeup` folder, so please check there for my 2-3 page .PDF
 
-`/results_c` has the training data for my campus map and evidence for my write up. Please use the following commands to reproduce my evident:
+`/results_c` has the training data for my campus map and evidence for my write up. Please use the following commands to reproduce my evidence:
 ```
 python3 run_project.py train --map maps/my_campus.txt --start S --goal W --epsilon 0.05 --output results_c/eps_005
 python3 run_project.py train --map maps/my_campus.txt --start S --goal W --epsilon 0.20 --output results_c/eps_020
