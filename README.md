@@ -2,6 +2,11 @@
 
 This is our project 1 that focuses on search and reinforcement learning. Edit this readme file with your own project introduction and run commands for your GitHub commits.
 
+## Run commands:
+python3 run_project.py train --map maps/my_campus.txt --start S --goal W --epsilon 0.05 --output results_c/eps_005
+python3 run_project.py train --map maps/my_campus.txt --start S --goal W --epsilon 0.20 --output results_c/eps_020
+python3 run_project.py train --map maps/my_campus.txt --start S --goal W --epsilon 0.50 --output results_c/eps_050
+
 ## Requirements
 
 Use Python 3.9+.
